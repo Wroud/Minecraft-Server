@@ -7,16 +7,24 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Server.Server.Network.Packets
 {
-    class Packett : Framework.Network.Packet
+    class Packet4UpdateTime : Framework.Network.Packet
     {
-        private byte opcode = 2;
+        private byte opcode = 4;
 
-        public static void Read(TcpClientm d)
+        public Packet4UpdateTime(TcpClientm d)
         {
+            this.data = d;
+        }
+
+        public static Packet Read(TcpClientm d)
+        {
+            return null;
         }
         public override void Write()
         {
             this.data.Write(opcode);
+            this.data.Write((long)0);
+            this.data.Write((long)0);
             this.data.Flush();
         }
     }

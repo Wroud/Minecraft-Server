@@ -58,11 +58,11 @@ namespace Minecraft_Server.Framework.Network
         public void EncryptStream(byte[] key)
         {
             this.NetStream.Flush();
-            decryptCipher = new BufferedBlockCipher(new CfbBlockCipher(new AesFastEngine(), 8));
-            decryptCipher.Init(false, new ParametersWithIV(
-                new KeyParameter(key), key, 0, 16));
             encryptCipher = new BufferedBlockCipher(new CfbBlockCipher(new AesFastEngine(), 8));
             encryptCipher.Init(true, new ParametersWithIV(
+                new KeyParameter(key), key, 0, 16));
+            decryptCipher = new BufferedBlockCipher(new CfbBlockCipher(new AesFastEngine(), 8));
+            decryptCipher.Init(false, new ParametersWithIV(
                 new KeyParameter(key), key, 0, 16));
             encrypted = true;
         }

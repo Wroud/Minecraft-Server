@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Server.Server.Network.Packets
 {
-    class Packett : Framework.Network.Packet
+    class Packet13PlayerLookMove : Framework.Network.Packet
     {
         private byte opcode = 2;
 

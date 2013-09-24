@@ -36,6 +36,7 @@ namespace Minecraft_Server.Server.Network.Packets
             byte[] v = ReadBytes(d);
             d.cli.onSharedKey(s, v);
         }
+
         public override void Write()
         {
             this.data.Write = true;

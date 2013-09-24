@@ -75,6 +75,20 @@ namespace Minecraft_Server
                 data = tc.encryptCipher.ProcessBytes(data);
             tc.write.Write(data, 0, data.Length);
         }
+        public unsafe static void Write(this TcpClientm tc, float n)
+        {
+            int nn = *(int*)&n;
+            byte[] data = new[]
+            {
+                (byte)((nn & 0xFF000000) >> 24),
+                (byte)((nn & 0xFF0000) >> 16),
+                (byte)((nn & 0xFF00) >> 8),
+                (byte)(nn & 0xFF)
+            };
+            if (tc.encrypted)
+                data = tc.encryptCipher.ProcessBytes(data);
+            tc.write.Write(data, 0, data.Length);
+        }
         public static void Write(this TcpClientm tc, long n)
         {
             byte[] data = new[]

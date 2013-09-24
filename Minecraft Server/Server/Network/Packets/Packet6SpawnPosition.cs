@@ -7,16 +7,25 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Server.Server.Network.Packets
 {
-    class Packett : Framework.Network.Packet
+    class Packet6SpawnPosition : Framework.Network.Packet
     {
-        private byte opcode = 2;
+        private byte opcode = 6;
 
-        public static void Read(TcpClientm d)
+        public Packet6SpawnPosition(TcpClientm d)
         {
+            this.data = d;
+        }
+
+        public static Packet Read(TcpClientm d)
+        {
+            return null;
         }
         public override void Write()
         {
             this.data.Write(opcode);
+            this.data.Write(0);
+            this.data.Write(64);
+            this.data.Write(0);
             this.data.Flush();
         }
     }

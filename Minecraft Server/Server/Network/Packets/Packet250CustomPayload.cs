@@ -7,16 +7,26 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Server.Server.Network.Packets
 {
-    class Packett : Framework.Network.Packet
+    class Packet250CustomPayload : Framework.Network.Packet
     {
-        private byte opcode = 2;
+        private byte opcode = 250;
+
+        public Packet250CustomPayload(TcpClientm d)
+        {
+            this.data = d;
+        }
 
         public static void Read(TcpClientm d)
         {
+            string s = ReadString(d, 20);
+            byte[] sd = ReadBytes(d);
         }
         public override void Write()
         {
+            this.data.Write = true;
             this.data.Write(opcode);
+            WriteString(this.data, "MC|Brand");
+            WriteString(this.data, "vanilla");
             this.data.Flush();
         }
     }

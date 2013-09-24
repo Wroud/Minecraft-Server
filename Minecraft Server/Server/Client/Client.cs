@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Minecraft_Server.Server.Client
@@ -16,6 +17,12 @@ namespace Minecraft_Server.Server.Client
 
         private Network.TcpClientm Net;
         public string username { get; set; }
+        public string region;
+        public byte vievdis;
+        public int chatvisible;
+        public bool chatcolor;
+        public byte diffuclity;
+        public bool showCape;
         public Client(Network.TcpClientm Net)
             : base(Net)
         {
@@ -28,6 +35,16 @@ namespace Minecraft_Server.Server.Client
             //Network.MessageQueue.Enqueue(packet);
         }
 
+        public void onClientInfo(string s, byte dis, int chvs, bool ccol, byte dif, bool shc)
+        {
+            this.region = s;
+            this.vievdis = dis;
+            this.chatvisible = chvs;
+            this.chatcolor = ccol;
+            this.diffuclity = dif;
+            this.showCape = shc;
+        }
+
         public void onCommand(byte c)
         {
             var encodedKey = AsnKeyBuilder.PublicKeyToX509(Main.Main.ServerKey);
@@ -36,6 +53,18 @@ namespace Minecraft_Server.Server.Client
                 .Concat(encodedKey.GetBytes()).ToArray();
 
             string hash = Cryptography.JavaHexDigest(shaData);
+            new Packet1Login(this.Net).Write();
+            Thread.Sleep(10);
+            //new Packet250CustomPayload(this.Net).Write();
+            //Thread.Sleep(10);
+            new Packet6SpawnPosition(this.Net).Write();
+            Thread.Sleep(10);
+            new Packet202PlayerAbilities(this.Net).Write();
+            Thread.Sleep(10);
+            new Packet16BlockItemSwitch(this.Net).Write();
+            Thread.Sleep(10);
+            new Packet4UpdateTime(this.Net).Write();
+            Thread.Sleep(10);
         }
 
         public void onSharedKey(byte[] s, byte[] v)

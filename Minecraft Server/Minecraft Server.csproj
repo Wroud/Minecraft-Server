@@ -11,6 +11,7 @@
     <AssemblyName>Minecraft Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>опубликовать\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,7 +24,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -36,6 +36,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -76,6 +77,14 @@
     <Compile Include="Framework\Object.cs" />
     <Compile Include="Framework\Util\Log.cs" />
     <Compile Include="Framework\Util\Utils.cs" />
+    <Compile Include="Server\Network\Packets\Packet1Login.cs" />
+    <Compile Include="Server\Network\Packets\Packet250CustomPayload.cs" />
+    <Compile Include="Server\Network\Packets\Packet6SpawnPosition.cs" />
+    <Compile Include="Server\Network\Packets\Packet202PlayerAbilities.cs" />
+    <Compile Include="Server\Network\Packets\Packet16BlockItemSwitch.cs" />
+    <Compile Include="Server\Network\Packets\Packet4UpdateTime.cs" />
+    <Compile Include="Server\Network\Packets\Packet204ClientInfo.cs" />
+    <Compile Include="Server\Network\Packets\Packet13PlayerLookMove.cs" />
     <Compile Include="Server\Utils\PlayerEnums.cs" />
     <Compile Include="Server\Utils\Vector3.cs" />
     <Compile Include="Program.cs" />

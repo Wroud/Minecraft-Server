@@ -7,16 +7,23 @@ using System.Threading.Tasks;
 
 namespace Minecraft_Server.Server.Network.Packets
 {
-    class Packett : Framework.Network.Packet
+    class Packet16BlockItemSwitch : Framework.Network.Packet
     {
-        private byte opcode = 2;
+        private byte opcode = 16;
 
-        public static void Read(TcpClientm d)
+        public Packet16BlockItemSwitch(TcpClientm d)
         {
+            this.data = d;
+        }
+
+        public static Packet Read(TcpClientm d)
+        {
+            return null;
         }
         public override void Write()
         {
             this.data.Write(opcode);
+            this.data.Write((short)0);
             this.data.Flush();
         }
     }

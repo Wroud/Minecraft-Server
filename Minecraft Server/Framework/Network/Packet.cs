@@ -18,7 +18,7 @@ namespace Minecraft_Server.Framework.Network
         {
             short chars = data.NetStream.ReadInt16(data);
             if (chars > max)
-                return data.NetStream.ReadString(data,chars).Remove(max);
+                return data.NetStream.ReadString(data, chars).Remove(max);
             else
                 return data.NetStream.ReadString(data, chars);
         }
@@ -26,7 +26,7 @@ namespace Minecraft_Server.Framework.Network
         public static byte[] ReadBytes(TcpClientm d)
         {
             short lenght = d.NetStream.ReadInt16(d);
-            return d.NetStream.ReadBytes(d,lenght);
+            return d.NetStream.ReadBytes(d, lenght);
         }
 
         public static void WriteBytes(TcpClientm d, byte[] b)
@@ -43,7 +43,8 @@ namespace Minecraft_Server.Framework.Network
         public static void WriteString(TcpClientm d, string s)
         {
             d.Write((short)s.Length);
-            d.Write(s);
+            if (s.Length > 0)
+                d.Write(s);
         }
     }
 }
